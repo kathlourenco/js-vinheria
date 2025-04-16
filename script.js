@@ -8,7 +8,7 @@ function cadastrarVinho() {
    
     nomevinho = prompt("Insira o nome de um vinho: ");
         
-        if (nomevinho === " "){
+        if (nomevinho.trim() === ""){
             alert("Insira o nome de um vinho da nossa loja!");
             nomevinho = prompt("Insira o nome de um vinho: ");
         }
@@ -16,28 +16,36 @@ function cadastrarVinho() {
 
     tipovinho = prompt("Insira o tipo do vinho: Tinto, Branco ou Rosé: ");
         
-        if (tipovinho === " "){
-            alert("Insira um tipo de vinho!");
+    tipovinho = tipovinho.trim().toLowerCase();
+        if (tipovinho !== "tinto" && tipovinho !== "branco" && tipovinho !== "rosé" && tipovinho !== "rose"){
+            alert("Insira um tipo de vinho da nossa loja!");
             tipovinho = prompt("Insira o tipo do vinho: Tinto, Branco ou Rosé: ");
+            tipovinho = tipovinho.trim().toLowerCase();
         }
 
 
-    dataproducao = prompt("Insira a data de produção do vinho: ");
+    dataproducao = prompt("Insira a data de produção do vinho: ").trim();
+    dataproducao = dataproducao.trim();
        
-        if (dataproducao === " "){
-            alert("A data de produção do vinho deve ser inserido!");
-            dataproducao = parseInt(prompt("Digite a data de produção do vinho: "));
+        if (dataproducao === "" || parseInt(dataproducao) < 1000 || parseInt(dataproducao) > 9999){
+            alert("Insira uma data de produção válida!");
+            dataproducao = parseInt(prompt("Insira a data de produção do vinho: ")); 
         }
+        dataproducao = parseInt(String(dataproducao).trim());
 
 
-    estoque = parseInt(prompt("Insira quantos vinhos deseja levar: "));
-        
-        if (estoque === " "){
-            alert("Insira a quantidade de vinhos no estoque!");
-            estoque = parseInt(prompt("Insira quantos vinhos deseja levar: "));
+    estoque = prompt("Insira quantos vinhos deseja levar: ");
+        if (estoque.trim() === "" || parseInt(estoque) <= 0) {
+            alert("Insira uma quantidade de vinhos válida no estoque!");
+            estoque = prompt("Insira quantos vinhos deseja levar: ");
         }
+        if (estoque.trim() === "" || parseInt(estoque) <= 0) {
+            alert("Valor inválido! Por favor, insira uma quantidade maior que 0.");
+            estoque = prompt("Insira quantos vinhos deseja levar: ");
+    }
+        estoque = parseInt(estoque);
+        alert("A quantidade de vinhos é: " + estoque);
 } 
-
 cadastrarVinho();
 
 
@@ -58,29 +66,30 @@ function detalhesVinho(nome, tipo, estoque, producao) {
     
 
     if(estoque < 5){
-        console.log ("Estoque do vinho escolhido : " + estoque + "Estoque baixo!");
+        console.log ("Estoque do vinho escolhido : " + estoque + "  " + "Estoque baixo!");
     } 
     else if(producao < 2015){
-            console.log("ano do vinho : " + producao + "Vinho Antigo!");
+            console.log("ano do vinho : " + producao + "  " + "  Vinho Antigo!");
     }
     else if(producao >= 2015 && producao <= 2019){
-            console.log("ano do vinho : " + producao + "Vinho Amadurecido!");
+            console.log("ano do vinho : " + producao + "  " + "  Vinho Amadurecido!");
     }
     else if(producao >= 2020 ){
-            console.log("ano do vinho : " + producao + "Vinho jovem!");
+            console.log("ano do vinho : " + producao + "  " + "  Vinho jovem!");
     }
     else {
         if(producao < 2015){
-            console.log("Data de produção do vinho : " + producao + "Vinho antigo!");
+            console.log("Data de produção do vinho : " + producao + "  " + "  Vinho antigo!");
         }
         if(producao >= 2015 && producao <= 2019){
-            console.log("Data de produção do vinho : " + producao + "Vinho amadurecido!");
+            console.log("Data de produção do vinho : " + producao + "   " + "  Vinho amadurecido!");
         }
         if(producao >= 2020 ){
-            console.log("Data de produção do vinho : " + producao + "Vinho jovem!");
+            console.log("Data de produção do vinho : " + producao + "  " + "  Vinho jovem!");
         }
         
     } 
     
-}
-detalhesVinho(nomevinho, tipovinho, estoque, dataproducao); 
+} 
+ 
+    detalhesVinho(nomevinho, tipovinho, estoque, dataproducao); 
